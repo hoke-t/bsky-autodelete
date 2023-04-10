@@ -14,9 +14,9 @@ stub = modal.Stub(
 
 @stub.function(
     secret=modal.Secret.from_name("bsky"),
-    schedule=modal.Cron("0 */1 * * * *"),
+    schedule=modal.Cron("*/5 * * * *"),
 )
-def delete_tmp_posts(delete_after=timedelta(minutes=1)):
+def delete_tmp_posts(delete_after=timedelta(hours=24)):
     handle = os.environ.get("BSKY_HANDLE")
     data = {"identifier": handle, "password": os.environ.get("BSKY_PASS")}
     resp = requests.post(
